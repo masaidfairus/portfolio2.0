@@ -1,0 +1,371 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+/* Define the Two Colors */
+:root {
+  --clr-primary: #e9f554; /* Neon Green */
+  --clr-dark: #1e1e1e; /* Very Dark Charcoal */
+  --clr-accent: #512da8; /* Bright Cyan */
+  --font-heading: "Times New Roman", serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+}
+
+* {
+  cursor: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow: hidden;
+  width: 100%;
+}
+
+.smooth-scroll-wrapper {
+  overflow: hidden; /* Mencegah scroll tambahan */
+  will-change: transform; /* Optimasi performa untuk animasi */
+  position: relative; /* Memastikan posisi elemen */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  overflow: hidden; /* Mencegah scroll tambahan */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero {
+  position: relative;
+  z-index: 1;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 2em;
+  mix-blend-mode: difference;
+  z-index: 4;
+}
+
+nav > div {
+  flex: 1;
+}
+
+.logo {
+  text-align: center;
+  font-family: "Times New Roman";
+}
+
+.logo a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-style: italic;
+  letter-spacing: -0.1vw;
+}
+
+.toggle-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.burger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.75em 2em 1.5em 2em;
+  background: rgba(255, 255, 255, 0);
+  outline: none;
+  border: none;
+  width: 28px;
+  height: 20px;
+  transition: all 250ms ease-out;
+  cursor: pointer;
+  will-change: transform; 
+}
+
+.burger::before,
+.burger::after {
+  content: "";
+  width: 40px;
+  height: 2px;
+  position: absolute;
+  background: var(--clr-primary);
+  transition: all 250ms ease-out;
+  will-change: transform;
+}
+
+.burger::before {
+  transform: translateY(-3px);
+}
+
+.burger::after {
+  transform: translateY(3px);
+}
+
+.active.burger::before {
+  transform: translateY(0) rotate(45deg);
+}
+
+.active.burger::after {
+  transform: translateY(0) rotate(-45deg);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: var(--clr-primary);
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  will-change: transform;
+  z-index: 3;
+}
+
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-item {
+  z-index: 3;
+  will-change: transform; 
+  display: flex;
+  cursor: pointer;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.menu-item p {
+  position: relative;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: -1.5vw;
+  font-size: 15vw;
+  line-height: 80%;
+  color: var(--clr-dark);
+  will-change: transform;
+  transition: letter-spacing 0.3s;
+}
+
+.menu-item p:hover {
+  letter-spacing: 0.001em;
+}
+
+.menu-item p#active::after {
+  content: "";
+  position: absolute;
+  top: 45%;
+  left: 0;
+  transform: translateY(-50%);
+  background: var(--clr-accent);
+  width: 0%;
+  height: 12px;
+}
+
+.sub-nav {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5em;
+  opacity: 0;
+}
+
+.sub-nav p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.5rem;
+  color: var(--clr-dark);
+  letter-spacing: -0.1vw;
+  transition: letter-spacing 0.3s;
+}
+
+.sub-nav p:hover {
+  letter-spacing: 0vw;
+}
+
+/* Body Styling */
+body {
+  font-family: var(--font-body);
+  background-color: var(--clr-dark);
+  color: var(--clr-primary); /* Text color matches the neon green */
+  margin: 0;
+  padding: 0;
+}
+
+.cursor {
+  --circle-size: 2.5rem;
+  position: fixed;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  border: 1px solid var(--clr-primary);
+  border-radius: 100%;
+  top: calc(var(--circle-size) / 2 * -1);
+  left: calc(var(--circle-size) / 2 * -1);
+  pointer-events: none;
+  z-index: 1000;
+
+  transition: transform 0.1s ease, background-color 0.3s;
+}
+
+.cursor.big {
+  background: var(--clr-primary);
+  transform: scale(2);
+}
+
+.cursor.shrink {
+  background: var(--clr-primary);
+  transform: scale(-1);
+}
+
+.cursor.black {
+  border: 1px solid var(--clr-dark);
+}
+
+.cursor.hoverblack {
+  background: var(--clr-dark);
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  position: relative;
+  z-index: 2; /* Pastikan berada di atas elemen lain */
+  font-family: var(--font-heading);
+  color: var(--clr-primary);
+  line-height: 0.8;
+  transition: transform 0.6s ease, margin 0.6s ease; /* Smooth transition for transform and margin */
+  margin: 0; /* Initial margin */
+}
+
+.letter-spacing-1 {
+  letter-spacing: -0.3rem;
+}
+
+.letter-spacing-1:nth-child(2) {
+  letter-spacing: -1rem;
+}
+
+h1:hover {
+  transform: scale(1.5) rotate(5deg); /* Slightly increase size on hover */
+  margin: 0 2rem; /* Adjust the margin to move the element */
+}
+
+@media (max-width: 48em) {
+  .letter-spacing-1 {
+    letter-spacing: -0.2rem; /* Less negative spacing on medium screens */
+  }
+  .letter-spacing-1:nth-child(2) {
+    letter-spacing: -0.6rem;
+  }
+
+  .circle-outer {
+    width: 35rem !important;
+    height: 15rem !important;
+  }
+
+  .circle-inner {
+    width: 35rem !important;
+    height: 15rem !important;
+  }
+}
+
+@media (max-width: 28em) {
+  h1:hover {
+    margin: 0 1rem; /* Adjust the margin to move the element */
+  }
+
+  .circle-outer {
+    width: 20rem !important;
+    height: 10rem !important;
+  }
+
+  .circle-inner {
+    width: 10rem !important;
+    height: 10rem !important;
+  }
+
+  .sub-nav p {
+    font-size: 1rem;
+  }
+}
+
+/* Lingkaran yang berputar otomatis dalam 3D */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  z-index: -2;
+  pointer-events: none;
+  animation: rotate-circle 10s linear infinite; /* Rotasi otomatis dalam 3D */
+  transform-style: preserve-3d; /* Menjaga struktur 3D saat berputar */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Rotasi otomatis dalam 3D dengan durasi 10 detik */
+}
+
+.circle-outer {
+  width: 40rem;
+  height: 40rem;
+  border: 3px solid var(--clr-primary);
+  position: absolute;
+  /* Efek 3D */
+  perspective: 1200px;
+}
+
+.circle-inner {
+  width: 40rem;
+  height: 20rem;
+  border: 3px solid var(--clr-primary);
+  perspective: 1200px;
+  position: absolute;
+  /* Efek rotasi 3D */
+  transform-style: preserve-3d;
+  animation: rotate-inner-circle 10s linear infinite; /* Rotasi otomatis dalam 3D */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Memberikan bayangan agar terlihat lebih tebal */
+}
+
+/* Animasi rotasi 3D acak untuk lingkaran */
+@keyframes rotate-circle {
+  0% {
+    transform: rotate3d(1, 1, 0, 0deg); /* Rotasi 3D dimulai */
+  }
+  100% {
+    transform: rotate3d(1, 1, 0, 360deg); /* Sampai penuh rotasi 360 derajat */
+  }
+}
+
+@keyframes rotate-inner-circle {
+  0% {
+    transform: rotate3d(1, 1, 1, 0deg); /* Rotasi 3D dimulai */
+  }
+  100% {
+    transform: rotate3d(1, 1, 1, 360deg); /* Sampai penuh rotasi 360 derajat */
+  }
+}
